@@ -377,7 +377,7 @@ NEAR_ENV=shardnet
 
 Visit [https://explorer.shardnet.near.org/nodes/validators](https://explorer.shardnet.near.org/nodes/validators) and make sure your validator stays active.
 
-![Screen Shot 2022-07-15 at 7.13.01 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/43b6c827-1284-484d-bae3-624a9b094f30/Screen_Shot_2022-07-15_at_7.13.01_PM.png)
+![Screen Shot 2022-07-15 at 7.13.01 PM.png](https://github.com/dlpigpen/stakewars-iii-instruction/blob/main/images/Screen%20Shot%202022-07-19%20at%2008.45.23.png?raw=true)
 
 ---
 
@@ -385,222 +385,92 @@ Visit [https://explorer.shardnet.near.org/nodes/validators](https://explorer.sha
 
 ### 004 - ****Monitor and make alerts****
 
-In this guide we’ll be monitoring [Near Prometheus Exporter](https://github.com/masknetgoal634/near-prometheus-exporter) data scraps with Grafana dashboard. 
+Our node is doing fine, but we need to check status periodically, because we can’t see terminal every time, we need some thing that will inform us if something will happen with our node.
 
-**Dependencies**
+I made a small script for notifications of changes in online status, validator status and peers. It will help to react quickly and help keep high uptime and avoid slashing. I will run this script every 60 sec. using cron.
 
-```bash
-# Install docker
-sudo apt-get update
-sudo apt install docker.io
+Script will send notifications to my telegram if something changes with node.
+
+Create a telegram bot using using the guide in Telegram docs: https://core.telegram.org/bots#creating-a-new-bot
+
+BotFather tell your new telegram_bot_token
+To get telegram_chat_id you can use: @getmyid_bot
+
+Get My ID bot sent your user id
+Now we have telegram_bot_token and telegram_chat_id
+```
+cd ~
+git clone https://github.com/Klesh-/near-protocol-node-telegram-notifications.git
+cd near-protocol-node-telegram-notifications
+```
+Clone .env.example into .env
+```
+cp .env.example .env
+```
+- Edit .env file and fill parameters:
+- TG_API_KEY to bot token which you got from BotFather
+- TG_CHAT_ID to user id which you got from getmyid_bot
+- POOL_ID to {PoolName}.factory.shardnet.near for me it’s klesh.factory.shardnet.near
+- Give execution permissions:
+```
+chmod +x ./report_node_status.sh
+```
+Test script:
+Open dialog with @<YourBotName> and click /start. Now your own bot allowed to send you messages.
+Run script
+```
+./report_node_status.sh
+```
+Message should appear in telegram from bot that you created
+
+Bot respond to us with latest status changes in node
+Now we need to let this script to be called every 1 min.
+```
+crontab -e
+```
+Put command as a cron job for every minute. Replace UserDirectory with path to user directory.
+```
+* * * * * /<UserDirectory>/near-protocol-node-telegram-notifications/report_node_status.sh &> /dev/null
 ```
 
-**Run node_exporter**
+Crontab job to check node status using script
+Script using node RPC and NEAR-CLI to get status.
+It watching: prev_epoch_kickout, current_validators, next_validators, current_proposals from CLI command response to get status of validator.
+Here is and example of notifications
 
-```bash
-sudo docker run -dit \
-    --restart always \
-    --volume /proc:/host/proc:ro \
-    --volume /sys:/host/sys:ro \
-    --volume /:/rootfs:ro \
-    --name node-exporter \
-    -p 9100:9100 prom/node-exporter:latest \
-    --path.procfs=/host/proc \
-    --path.sysfs=/host/sys
+Telegram notifications
+Setup Grafana to get detailed information about our node.
+I made easy to setup repository with Grafana + Prometheus and preloaded dashboard with alerts on all important parameters of node.
+All you need is clone, configure and run.
+GitHub - Klesh-/near-protocol-node-monitoring: A monitoring tool based on Grafana + Prometheus for…
+A monitoring tool based on Grafana + Prometheus for Near Protocol Node - GitHub - Klesh-/near-protocol-node-monitoring…
+github.com
+
+Clone repository into home directory
 ```
-
-**Build Near Prometheus Exporter**
-
-```bash
-git clone https://github.com/masknetgoal634/near-prometheus-exporter
-
-cd near-prometheus-exporter
-
-sudo docker build -t near-prometheus-exporter .
+cd ~
+git clone https://github.com/Klesh-/near-protocol-node-monitoring.git
+cd near-protocol-node-monitoring
+chmod +x start.sh
 ```
-
-**Run the container**
-
-```bash
-sudo docker run -dit \
-    --restart always \
-    --name near-exporter \
-    --network=host \
-    -p 9333:9333 \
-    near-prometheus-exporter:latest /dist/main -accountId mitsorilab2.factory.shardnet.near
+Clone .env.example into .env
 ```
-
-**Configure Prometheus**
-
-```bash
-# Stay in this folder
-cd near-prometheus-exporter/etc
-nano prometheus/prometheus.yml
-
-# Fill in your node IP in these targets
-
-  - job_name: node
-    scrape_interval: 5s
-    static_configs:
-    - targets: ['<NODE_IP_ADDRESS>:9100']
-
-  - job_name: near-exporter
-    scrape_interval: 15s
-    static_configs:
-    - targets: ['<NODE_IP_ADDRESS>:9333']
-
-  - job_name: near-node
-    scrape_interval: 15s
-    static_configs:
-    - targets: ['<NODE_IP_ADDRESS>:3030']
+cp .env.example .env
 ```
-
-**Run Prometheus**
-
-```bash
-sudo docker run -dti \
-    --restart always \
-    --volume $(pwd)/prometheus:/etc/prometheus/ \
-    --name prometheus \
-    --network=host \
-    -p 9090:9090 prom/prometheus:latest \
-    --config.file=/etc/prometheus/prometheus.yml
+Edit .env file and fill parameters:
+GRAFANA_ADMIN_PASSWORD to admin password of Grafana
+Run monitoring service
 ```
-
-**Run Grafana**
-
-```bash
-# Check user ID
-id -u
-1000
-
-# Edit permission
-sudo chown -R 1000:1000 grafana/*
-
-sudo docker run -dit \
-    --restart always \
-    --volume $(pwd)/grafana:/var/lib/grafana \
-    --volume $(pwd)/grafana/provisioning:/etc/grafana/provisioning \
-    --volume $(pwd)/grafana/custom.ini:/etc/grafana/grafana.ini \
-    --user 1000 \
-    --network=host \
-    --name grafana \
-    -p 3000:3000 grafana/grafana
+./start.sh
 ```
+After it download all necessary docker images you can open http://{YourNodeIP}:19000 and see Grafana welcome screen.
+Use login admin and password that you set earlier.
+Navigate to Alerting > Notification channels > Add channel
+Add telegram channel using bot token and chat id from previous step.
 
-Visit <your ip>:3000 to access grafana dashboard, log in with admin/admin
+Save and navigate to Near Node dashboard.
 
-![Screen Shot 2022-07-15 at 2.15.51 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7ff6152a-3e01-42b8-aa6c-02445cf76e2e/Screen_Shot_2022-07-15_at_2.15.51_PM.png)
-
-Go to settings, data sources, Prometheus, click save and test to see if the source is properly configured.
-
-![Screen Shot 2022-07-15 at 2.23.09 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0231a827-3483-4dfc-bede-9b095e370162/Screen_Shot_2022-07-15_at_2.23.09_PM.png)
-
-Go to Dashboard and select Near Node Exporter Full, you should see something like this,
-
-![Screen Shot 2022-07-15 at 2.26.33 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/23885eae-6ff2-4954-a3f0-9dd4a372f6be/Screen_Shot_2022-07-15_at_2.26.33_PM.png)
-
-**Alerting**
-
-You’ll need an SMTP server to send email alerts, we’ll be using [mailjet](https://www.mailjet.com/) here. Apply for an account and generate both API key and secret key.
-
-![Screen Shot 2022-07-15 at 7.54.08 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0546166c-02ef-4d22-b513-af4fef2944e4/Screen_Shot_2022-07-15_at_7.54.08_PM.png)
-
-Save the keys somewhere safe.
-
-**Edit Grafana SMTP setting**
-
-```bash
-cd ~/near-prometheus-exporter/etc
-nano grafana/custom.ini
-
-[smtp]
-enabled = true
-host = in-v3.mailjet.com:587 
-user = <your API key>
-# If the password contains # or ; you have to wrap it with triple quotes. Ex """#password;"""
-password = <your secret key>
-;cert_file =
-;key_file =
-skip_verify = true
-from_address = <your_email_address>
-from_name = Grafana
-# EHLO identity in SMTP dialog (defaults to instance_name)
-;ehlo_identity = dashboard.example.com
-# SMTP startTLS policy (defaults to 'OpportunisticStartTLS') 
-;startTLS_policy = NoStartTLS
-```
-
-**Restart grafana container**
-
-```bash
-sudo docker ps -a
-
-# Copy your grafana container ID
-sudo docker container restart <grafana container ID>
-```
-
-Go back to your grafana dashboard, under Alerting → Contact points, enter a testing email under Addresses
-
-![Screen Shot 2022-07-15 at 8.21.13 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4e298bb2-a042-4d3c-a615-bb280ed51194/Screen_Shot_2022-07-15_at_8.21.13_PM.png)
-
-Click Test to see if the email sends through, successful signal looks like this.
-
-![Screen Shot 2022-07-15 at 7.59.23 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/47dd89f5-5a5d-4d89-99ac-6fad7db51cc6/Screen_Shot_2022-07-15_at_7.59.23_PM.png)
-
-An alert to your email will look like this
-
-![IMG_3831.PNG](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ab790304-417c-4b92-a0da-cfedfd36df69/IMG_3831.png)
-
-**A little more real time**
-
-While email notifications can serve the purpose, we recommend alerting to a more real time and “louder” app, such instant messengers. Grafana has a long list of integrations,
-
-![Screen Shot 2022-07-16 at 10.01.53 AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5b8c9af5-3eca-4dcb-b109-0b32e6b97c94/Screen_Shot_2022-07-16_at_10.01.53_AM.png)
-
-We’ll connect to LINE instant messenger here, first arpply for a LINE notify token [https://notify-bot.line.me/](https://notify-bot.line.me/)
-
-![Screen Shot 2022-07-16 at 9.58.56 AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3a1f80e4-a3b3-4f43-bd0f-cd443126c6c7/Screen_Shot_2022-07-16_at_9.58.56_AM.png)
-
-Hook up the token to the people that need to be notified, and fill the token back in grafana. Upon an alert, you’ll get an instant message like this
-
-![IMG_3828.PNG](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b45451fd-c124-41ca-ab51-278090b492aa/IMG_3828.png)
-
-**Adding an alert rule**
-
-Go to the dashboard and select a panel with a graph, you can edit a custom rule based on your preferred sensitivity settings. We’ll demonstrate adding an alert rule when the stake falls below a threshold.
-
-![Screen Shot 2022-07-16 at 10.11.57 AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ca677c36-e835-40e1-92cd-b7e36786f5ce/Screen_Shot_2022-07-16_at_10.11.57_AM.png)
-
-When an alert is triggered, it’ll enter “Firing” state
-
-![Screen Shot 2022-07-16 at 10.15.34 AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/dc2eee49-fcbb-482e-a729-e7c62d0af7ef/Screen_Shot_2022-07-16_at_10.15.34_AM.png)
-
-You should immediately receive a notification similar to this,
-
-![IMG_3829.PNG](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/33f80929-e26b-4cfa-890b-06422742230a/IMG_3829.png)
-
-Its also a good idea to send out notifications to your members when an issue is resolved, 
-
-![IMG_3830.PNG](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/839c0f48-0332-4e8a-9f82-f4451e1384cc/IMG_3830.png)
-
-**Common RPC commands**
-
-```bash
-# Check your node version
-curl -s http://127.0.0.1:3030/status | jq .version
-
-# Check delegators and stake 
-near view mitsorilab2.factory.shardnet.near get_accounts '{"from_index": 0, "limit": 10}' --accountId mitsorilab2.shardnet.near
-
-# Check reason for validator kicked
-curl -s -d '{"jsonrpc": "2.0", "method": "validators", "id": "dontcare", "params": [null]}' -H 'Content-Type: application/json' https://rpc.shardnet.near.org/ | jq -c '.result.prev_epoch_kickout[] | select(.account_id | contains ("mitsorilab2"))' | jq .reason
-
-# Check blocks produced / expected 
-curl -s -d '{"jsonrpc": "2.0", "method": "validators", "id": "dontcare", "params": [null]}' -H 'Content-Type: application/json' http://localhost:3030/ | jq -c '.result.current_validators[] | select(.account_id | contains ("mitsorilab2.factory.shardnet.near"))'
-```
-
----
+Now you have super detailed information about what happening in Near node and will get alerts to telegram if any of these parameters are out of range.
 
 # **Challenge 005**
 
@@ -632,7 +502,7 @@ c5.2xlarge with 500gb SSD will run for ~$210 per month on a one year EC2 Instanc
 
 ---
 
-## Lydia Labs
+## Mitsori Labs
 
 Website: [https://hamado-ltd.com/](https://hamado-ltd.com)
 
