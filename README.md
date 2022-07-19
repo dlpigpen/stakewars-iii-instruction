@@ -158,15 +158,15 @@ near login
 
 Copy the link and launch it your browser.
 
-![Screen Shot 2022-07-14 at 2.18.07 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/12e9d735-5235-46e6-a155-7b362cf71022/Screen_Shot_2022-07-14_at_2.18.07_PM.png)
+![Screen Shot 2022-07-14 at 2.18.07 PM.png](https://github.com/dlpigpen/stakewars-iii-instruction/blob/main/images/Screen%20Shot%202022-07-19%20at%2008.34.36.png?raw=true)
 
 Your account ID is the one created from [001 - **Create a wallet on shardnet**](https://www.notion.so/001-Create-a-wallet-on-shardnet-86037592975c4999ab998d99936269a2). The page should go to unreachable state after you confirm.
 
-![Screen Shot 2022-07-14 at 2.18.17 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f2231628-9406-4b31-a1ee-b868d75b8478/Screen_Shot_2022-07-14_at_2.18.17_PM.png)
+![Screen Shot 2022-07-14 at 2.18.17 PM.png](https://github.com/dlpigpen/stakewars-iii-instruction/blob/main/images/Screen_Shot_2022-07-14_at_2.18.17_PM.png?raw=true)
 
 Go back to the terminal and enter the same ID to complete login.
 
-![Screen Shot 2022-07-14 at 2.19.00 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c2700f96-d1ee-4b99-89f3-8ebf30c243f8/Screen_Shot_2022-07-14_at_2.19.00_PM.png)
+![Screen Shot 2022-07-14 at 2.19.00 PM.png](https://github.com/dlpigpen/stakewars-iii-instruction/blob/main/images/Screen%20Shot%202022-07-19%20at%2008.36.53.png?raw=true)
 
 **Make a validator_key from your wallet**
 
@@ -235,7 +235,7 @@ sudo apt install ccze
 journalctl -fu neard | ccze -A
 ```
 
-![Screen Shot 2022-07-14 at 5.58.47 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/69c262e2-4d17-4bbb-8dd5-867884a85727/Screen_Shot_2022-07-14_at_5.58.47_PM.png)
+![Screen Shot 2022-07-14 at 5.58.47 PM.png](https://github.com/dlpigpen/stakewars-iii-instruction/blob/main/images/Screen%20Shot%202022-07-19%20at%2008.37.19.png?raw=true)
 
 ---
 
@@ -262,9 +262,9 @@ near call factory.shardnet.near create_staking_pool '{"staking_pool_id": "mitsor
 ```
 
 Upon completion, you should receive an URL similar to this
-[https://explorer.shardnet.near.org/transactions/3R96WYapQvc5CmJJ6GLZRP2NWv7S4a9nFVipJ2Y7V1zv](https://explorer.shardnet.near.org/transactions/3R96WYapQvc5CmJJ6GLZRP2NWv7S4a9nFVipJ2Y7V1zv). Visit the link in your browser to confirm the transaction on the tracker.
+[https://explorer.shardnet.near.org/transactions/8rFah6Uus4y6jUhbGCg6gxH8YDTfvGv7ZkjJrcYWgijD](https://explorer.shardnet.near.org/transactions/8rFah6Uus4y6jUhbGCg6gxH8YDTfvGv7ZkjJrcYWgijD). Visit the link in your browser to confirm the transaction on the tracker.
 
-![Screen Shot 2022-07-14 at 8.51.39 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3796dd40-45cb-4703-9a73-727322f8bc24/Screen_Shot_2022-07-14_at_8.51.39_PM.png)
+![Screen Shot 2022-07-14 at 8.51.39 PM.png](https://github.com/dlpigpen/stakewars-iii-instruction/blob/main/images/Screen%20Shot%202022-07-19%20at%2008.39.10.png?raw=true)
 
 **Staking to the pool**
 
@@ -337,7 +337,7 @@ near call mitsorilab2.factory.shardnet.near ping '{}' --accountId mitsorilab2.sh
 
 Visit this link: [https://explorer.shardnet.near.org/nodes/validators](https://explorer.shardnet.near.org/nodes/validators) to see if the proposal has been submitted properly, you should see something like this
 
-![Screen Shot 2022-07-14 at 9.29.32 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2c5986a4-51cf-4bd9-90c9-b81227c684c5/Screen_Shot_2022-07-14_at_9.29.32_PM.png)
+![Screen Shot 2022-07-14 at 9.29.32 PM.png](https://github.com/dlpigpen/stakewars-iii-instruction/blob/main/images/Screen%20Shot%202022-07-19%20at%2008.39.46.png?raw=true)
 
 **Ping**
 
