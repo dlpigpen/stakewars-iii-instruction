@@ -42,7 +42,7 @@ A proposal by a validator indicates they would like to enter the validator set, 
 
 Command: `near proposals`
 
-![Screen Shot 2022-07-14 at 9.41.25 AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2e112eca-e2fb-47c0-995b-1912a6e9fcda/Screen_Shot_2022-07-14_at_9.41.25_AM.png)
+![Screen Shot 2022-07-14 at 9.41.25 AM.png](https://github.com/dlpigpen/stakewars-iii-instruction/blob/main/images/Screen%20Shot%202022-07-19%20at%2008.12.34.png?raw=true)
 
 *Validators Current*
 
@@ -50,7 +50,7 @@ This shows a list of active validators in the current epoch, the number of block
 
 Command: `near validators current`
 
-![Screen Shot 2022-07-14 at 9.41.41 AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a6331c2e-feac-4820-a1a3-e29f2f7fa0b5/Screen_Shot_2022-07-14_at_9.41.41_AM.png)
+![Screen Shot 2022-07-14 at 9.41.41 AM.png](https://github.com/dlpigpen/stakewars-iii-instruction/blob/main/images/Screen%20Shot%202022-07-19%20at%2008.11.34.png?raw=true)
 
 *Validators Next*
 
@@ -58,7 +58,7 @@ This shows validators whose proposal was accepted one epoch ago, and that will e
 
 Command: `near validators next`
 
-![Screen Shot 2022-07-14 at 9.41.49 AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/266ec70c-8945-445b-823f-4dc626f81ac7/Screen_Shot_2022-07-14_at_9.41.49_AM.png)
+![Screen Shot 2022-07-14 at 9.41.49 AM.png](https://github.com/dlpigpen/stakewars-iii-instruction/blob/main/images/Screen%20Shot%202022-07-19%20at%2008.13.00.png?raw=true)
 
 Full list of Near CLI commands: [https://github.com/near/near-cli](https://github.com/near/near-cli)
 
@@ -144,11 +144,11 @@ Go to your Near-CLI instance from challenge 001
 
 For better clarity, we’ll provide examples for these parameters:
 
-<account_id>: lydialabs.shardnet.near
+<account_id>: mitsorilab2.shardnet.near
 
-<pool_name>: lydialabs
+<pool_name>: mitsorilab2
 
-<pool_id>: lydialabs.factory.shardnet.near
+<pool_id>: mitsorilab2.factory.shardnet.near
 
 **Install access key locally**
 
@@ -171,7 +171,7 @@ Go back to the terminal and enter the same ID to complete login.
 **Make a validator_key from your wallet**
 
 ```bash
-cp ~/.near-credentials/shardnet/lydialabs.shardnet.near.json ~/.near/validator_key.json
+cp ~/.near-credentials/shardnet/mitsorilab2.shardnet.near.json ~/.near/validator_key.json
 ```
 
 **Edit validator_key.json**
@@ -180,7 +180,7 @@ cp ~/.near-credentials/shardnet/lydialabs.shardnet.near.json ~/.near/validator_k
 nano $HOME/.near/validator_key.json
 
 {
-	"account_id":"lydialabs.shardnet.near",
+	"account_id":"mitsorilab2.shardnet.near",
 	"public_key":"ed25519:GEq98E9ZM5VKHvmRMoHnamD5xXspAGprUGQFQF7vuu7E",
 	"private_key":"ed25519:*******************************************"
 }
@@ -192,7 +192,7 @@ You should end up with something like this
 
 ```bash
 {
-	"account_id":"lydialabs.factory.shardnet.near",
+	"account_id":"mitsorilab2.factory.shardnet.near",
 	"public_key":"ed25519:GEq98E9ZM5VKHvmRMoHnamD5xXspAGprUGQFQF7vuu7E",
 	"secret_key":"ed25519:*******************************************"
 }
@@ -241,11 +241,11 @@ journalctl -fu neard | ccze -A
 
 # **Challenge 003**
 
-<account_id>: lydialabs.shardnet.near
+<account_id>: mitsorilab2.shardnet.near
 
-<pool_name>: lydialabs
+<pool_name>: mitsorilab2
 
-<pool_id>: lydialabs.factory.shardnet.near
+<pool_id>: mitsorilab2.factory.shardnet.near
 
 ### 003 - Deploy a staking pool contract
 
@@ -258,7 +258,7 @@ near call factory.shardnet.near create_staking_pool '{"staking_pool_id": "<pool 
 **Example**
 
 ```bash
-near call factory.shardnet.near create_staking_pool '{"staking_pool_id": "lydialabs", "owner_id": "lydialabs.shardnet.near", "stake_public_key": "GEq98E9ZM5VKHvmRMoHnamD5xXspAGprUGQFQF7vuu7E", "reward_fee_fraction": {"numerator": 5, "denominator": 100}, "code_hash":"DD428g9eqLL8fWUxv8QSpVFzyHi1Qd16P8ephYCTmMSZ"}' --accountId="lydialabs.shardnet.near" --amount=30 --gas=300000000000000
+near call factory.shardnet.near create_staking_pool '{"staking_pool_id": "mitsorilab2", "owner_id": "mitsorilab2.shardnet.near", "stake_public_key": "GEq98E9ZM5VKHvmRMoHnamD5xXspAGprUGQFQF7vuu7E", "reward_fee_fraction": {"numerator": 5, "denominator": 100}, "code_hash":"DD428g9eqLL8fWUxv8QSpVFzyHi1Qd16P8ephYCTmMSZ"}' --accountId="mitsorilab2.shardnet.near" --amount=30 --gas=300000000000000
 ```
 
 Upon completion, you should receive an URL similar to this
@@ -275,13 +275,13 @@ near call <pool_id> deposit_and_stake --amount <NEAR amount> --accountId <accoun
 **Example**
 
 ```bash
-near call lydialabs.factory.shardnet.near deposit_and_stake --amount 550 --accountId lydialabs.shardnet.near --gas=300000000000000
+near call mitsorilab2.factory.shardnet.near deposit_and_stake --amount 550 --accountId mitsorilab2.shardnet.near --gas=300000000000000
 ```
 
 **View staked balance**
 
 ```bash
-near view lydialabs.factory.shardnet.near get_account_staked_balance '{"account_id": "lydialabs.shardnet.near"}'
+near view mitsorilab2.factory.shardnet.near get_account_staked_balance '{"account_id": "mitsorilab2.shardnet.near"}'
 ```
 
 **Misc functions you can invoke**
@@ -290,7 +290,7 @@ near view lydialabs.factory.shardnet.near get_account_staked_balance '{"account_
 # Unstake yoctoNEAR
 near call <pool_id> unstake '{"amount": "<amount yoctoNEAR>"}' --accountId <account_id> --gas=300000000000000
 
-near call lydialabs.factory.shardnet.near unstake '{"amount": "1501013553987867946208039512"}' --accountId lydialabs.shardnet.near --gas=300000000000000
+near call mitsorilab2.factory.shardnet.near unstake '{"amount": "1501013553987867946208039512"}' --accountId mitsorilab2.shardnet.near --gas=300000000000000
 
 # Unstake all NEAR
 near call <pool_id> unstake_all --accountId <account_id> --gas=300000000000000
@@ -307,12 +307,12 @@ near view <pool_id> get_account_staked_balance '{"account_id": "<account_id>"}'
 # Unstaked Balance
 near view <pool_id> get_account_unstaked_balance '{"account_id": "<account_id>"}'
 
-near view lydialabs.factory.shardnet.near get_account_unstaked_balance '{"account_id": "lydialabs.shardnet.near"}'
+near view mitsorilab2.factory.shardnet.near get_account_unstaked_balance '{"account_id": "mitsorilab2.shardnet.near"}'
 
 # Available for Withdrawal
 near view <pool_id> is_account_unstaked_balance_available '{"account_id": "<account_id>"}'
 
-near view lydialabs.factory.shardnet.near is_account_unstaked_balance_available '{"account_id": "lydialabs.shardnet.near"}'
+near view mitsorilab2.factory.shardnet.near is_account_unstaked_balance_available '{"account_id": "mitsorilab2.shardnet.near"}'
 
 # Pause Staking
 near call <pool_id> pause_staking '{}' --accountId <account_id>
@@ -332,7 +332,7 @@ near call <pool_id> ping '{}' --accountId <account_id> --gas=300000000000000
 **Example**
 
 ```bash
-near call lydialabs.factory.shardnet.near ping '{}' --accountId lydialabs.shardnet.near --gas=300000000000000
+near call mitsorilab2.factory.shardnet.near ping '{}' --accountId mitsorilab2.shardnet.near --gas=300000000000000
 ```
 
 Visit this link: [https://explorer.shardnet.near.org/nodes/validators](https://explorer.shardnet.near.org/nodes/validators) to see if the proposal has been submitted properly, you should see something like this
@@ -348,7 +348,7 @@ near call <pool_id> ping '{}' --accountId <account_id> --gas=300000000000000
 **Example**
 
 ```bash
-near call lydialabs.factory.shardnet.near ping '{}' --accountId lydialabs.shardnet.near --gas=300000000000000
+near call mitsorilab2.factory.shardnet.near ping '{}' --accountId mitsorilab2.shardnet.near --gas=300000000000000
 ```
 
 A ping issues a new proposal and updates the staking balances for your delegators. A ping should be issued each epoch to keep reported rewards current.
@@ -361,7 +361,7 @@ crontab -e
 # This needs to be set again else it'll look for testnet by default
 NEAR_ENV=shardnet
 # Current epoch is around ~2.5h, we'll invoke ping every hour for now
-0 * * * * near call lydialabs.factory.shardnet.near ping '{}' --accountId lydialabs.shardnet.near --gas=300000000000000 >> $HOME/cron.log
+0 * * * * near call mitsorilab2.factory.shardnet.near ping '{}' --accountId mitsorilab2.shardnet.near --gas=300000000000000 >> $HOME/cron.log
 ```
 
 ### 003 - Becoming a validator
@@ -427,7 +427,7 @@ sudo docker run -dit \
     --name near-exporter \
     --network=host \
     -p 9333:9333 \
-    near-prometheus-exporter:latest /dist/main -accountId lydialabs.factory.shardnet.near
+    near-prometheus-exporter:latest /dist/main -accountId mitsorilab2.factory.shardnet.near
 ```
 
 **Configure Prometheus**
@@ -591,13 +591,13 @@ Its also a good idea to send out notifications to your members when an issue is 
 curl -s http://127.0.0.1:3030/status | jq .version
 
 # Check delegators and stake 
-near view lydialabs.factory.shardnet.near get_accounts '{"from_index": 0, "limit": 10}' --accountId lydialabs.shardnet.near
+near view mitsorilab2.factory.shardnet.near get_accounts '{"from_index": 0, "limit": 10}' --accountId mitsorilab2.shardnet.near
 
 # Check reason for validator kicked
-curl -s -d '{"jsonrpc": "2.0", "method": "validators", "id": "dontcare", "params": [null]}' -H 'Content-Type: application/json' https://rpc.shardnet.near.org/ | jq -c '.result.prev_epoch_kickout[] | select(.account_id | contains ("lydialabs"))' | jq .reason
+curl -s -d '{"jsonrpc": "2.0", "method": "validators", "id": "dontcare", "params": [null]}' -H 'Content-Type: application/json' https://rpc.shardnet.near.org/ | jq -c '.result.prev_epoch_kickout[] | select(.account_id | contains ("mitsorilab2"))' | jq .reason
 
 # Check blocks produced / expected 
-curl -s -d '{"jsonrpc": "2.0", "method": "validators", "id": "dontcare", "params": [null]}' -H 'Content-Type: application/json' http://localhost:3030/ | jq -c '.result.current_validators[] | select(.account_id | contains ("lydialabs.factory.shardnet.near"))'
+curl -s -d '{"jsonrpc": "2.0", "method": "validators", "id": "dontcare", "params": [null]}' -H 'Content-Type: application/json' http://localhost:3030/ | jq -c '.result.current_validators[] | select(.account_id | contains ("mitsorilab2.factory.shardnet.near"))'
 ```
 
 ---
