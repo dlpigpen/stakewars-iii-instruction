@@ -136,7 +136,7 @@ cd nearcore
 
 We will configure a system service for the daemon in later steps, for now keep the process running,  download all headers and sync to the latest block height. (This will take a fair amount of time).
 
-![Screen Shot 2022-07-14 at 1.42.16 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1ba2dcfc-eba8-4533-8740-dd46b5767697/Screen_Shot_2022-07-14_at_1.42.16_PM.png)
+![Screen Shot 2022-07-14 at 1.42.16 PM.png](https://github.com/dlpigpen/stakewars-iii-instruction/blob/main/images/Screen_Shot_2022-07-14_at_1.42.16_PM%20(1).png?raw=true)
 
 ### 002 - Configure keys
 
