@@ -525,7 +525,7 @@ Enter the following to `ping.sh`
 # Ping call to renew Proposal added to crontab
 
 export NEAR_ENV=shardnet
-export LOGS=/home/<user_id>/logs
+export LOGS=/root/<user_id>/logs
 export POOLID=<pool_id>
 export ACCOUNTID=<account_id>
 
