@@ -482,9 +482,9 @@ This guide was already created on AWS, as seen in challenge 002. We’ll documen
 
 Ubuntu Server 22.04 LTS (HVM), SSD Volume Type
 
-**Recommended (c5.xlarge)**
+**Recommended (tg4.2xlarge)**
 
-**Our spec (c5.2xlarge)**
+**Our spec (tg4.2xlarge)**
 
 We find the recommended specs to be sufficient for chunk production, but still upgraded it due to that fact that we’re running a few other services, including monitoring and alerting on the same instance. 
 
@@ -492,13 +492,9 @@ We find the recommended specs to be sufficient for chunk production, but still u
 
 To create a pricing estimate, visit the [AWS calculator](https://calculator.aws/#/estimate)
 
-c5.xlarge with 500gb SSD will run for ~$130 per month on a one year EC2 Instance Savings Plans
+tg4.2xlarge with 200gb SSD will run for ~$3 per month on a one year EC2 Instance All Upfront Plans
 
-![Screen Shot 2022-07-16 at 4.40.07 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a1acef7b-220e-4870-8989-c9f9123f6dbf/Screen_Shot_2022-07-16_at_4.40.07_PM.png)
-
-c5.2xlarge with 500gb SSD will run for ~$210 per month on a one year EC2 Instance Savings Plans
-
-![Screen Shot 2022-07-16 at 4.41.24 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/431b9edb-3b4a-4595-82db-ab1b9d94c046/Screen_Shot_2022-07-16_at_4.41.24_PM.png)
+![Screen Shot 2022-07-16 at 4.40.07 PM.png](Screen Shot 2022-07-20 at 11.40.37)
 
 ---
 
