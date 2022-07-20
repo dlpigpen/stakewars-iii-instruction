@@ -494,7 +494,7 @@ To create a pricing estimate, visit the [AWS calculator](https://calculator.aws/
 
 tg4.2xlarge with 200gb SSD will run for ~$3 per month on a one year EC2 Instance All Upfront Plans
 
-![Screen Shot 2022-07-16 at 4.40.07 PM.png](Screen Shot 2022-07-20 at 11.40.37)
+![Screen Shot 2022-07-16 at 4.40.07 PM.png]([Screen Shot 2022-07-20 at 11.40.37](https://github.com/dlpigpen/stakewars-iii-instruction/blob/main/images/Screen%20Shot%202022-07-20%20at%2011.40.52.png?raw=true))
 
 ---
 
