@@ -498,6 +498,57 @@ tg4.2xlarge with 200gb SSD will run for ~$3 per month on a one year EC2 Instance
 
 ---
 
+** Challenge 006**
+
+### 006 - **Ping the network**
+
+**Create directories to store logs**
+
+```bash
+cd $HOME && mkdir scripts && mkdir logs
+cd scripts
+nano ping.sh
+```
+
+<user_id> is retrieved in the terminal with `echo $USER`
+
+<account_id>: mitsorilab2.shardnet.near
+
+<pool_id>: mitsorilab2.factory.shardnet.near
+
+**Create a ping script**
+
+Enter the following to `ping.sh`
+
+```bash
+#!/bin/sh
+# Ping call to renew Proposal added to crontab
+
+export NEAR_ENV=shardnet
+export LOGS=/home/<user_id>/logs
+export POOLID=<pool_id>
+export ACCOUNTID=<account_id>
+
+echo "---" >> $LOGS/all.log
+date >> $LOGS/all.log
+near call $POOLID ping '{}' --accountId $ACCOUNTID --gas=300000000000000 >> $LOGS/all.log
+near proposals | grep $POOLID >> $LOGS/all.log
+near validators current | grep $POOLID >> $LOGS/all.log
+near validators next | grep $POOLID >> $LOGS/all.log
+```
+
+**Update crontab**
+
+```bash
+crontab -e
+
+# Fill this in
+*/5 * * * * sh /home/<user_id>/scripts/ping.sh
+```
+
+Check under `/home/<user_id>/logs/all.log` for ping history
+	
+	
 ## Mitsori Labs
 
 Website: [https://hamado-ltd.com/](https://hamado-ltd.com)
