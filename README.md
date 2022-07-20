@@ -557,4 +557,4 @@ Twitter: [https://twitter.com/mitsori_md](https://twitter.com/mitsori_md)
 
 Github: https://github.com/dlpigpen](https://github.com/dlpigpen)
 
-Chunk-Only Producer: [mitsorilab.factory.shardnet.near](https://explorer.shardnet.near.org/accounts/mitsorilab.factory.shardnet.near)
+Chunk-Only Producer: [mitsorilab2.factory.shardnet.near](https://explorer.shardnet.near.org/accounts/mitsorilab.factory.shardnet.near)
