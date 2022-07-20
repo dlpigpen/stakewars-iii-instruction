@@ -104,7 +104,7 @@ source $HOME/.cargo/env
 git clone https://github.com/near/nearcore
 cd nearcore
 git fetch origin --tags
-git checkout 1.28.0-rc.2
+git checkout 8448ad1ebf27731a43397686103aa5277e7f2fcf
 
 # Build the binary, this will take some time
 cargo build -p neard --release --features shardnet
@@ -124,10 +124,11 @@ rm ~/.near/config.json
 wget -O ~/.near/config.json https://s3-us-west-1.amazonaws.com/build.nearprotocol.com/nearcore-deploy/shardnet/config.json
 
 # Download data snapshot
+# This step has been removed for the latest commit: git checkout 8448ad1ebf27731a43397686103aa5277e7f2fcf
 sudo apt-get install awscli -y
-cd ~/.near
-aws s3 --no-sign-request cp s3://build.openshards.io/stakewars/shardnet/data.tar.gz .  
-tar -xzvf data.tar.gz
+# cd ~/.near
+# aws s3 --no-sign-request cp s3://build.openshards.io/stakewars/shardnet/data.tar.gz .  
+# tar -xzvf data.tar.gz
 
 # Start the node
 cd nearcore
