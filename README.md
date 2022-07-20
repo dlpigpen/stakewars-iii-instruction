@@ -498,7 +498,7 @@ tg4.2xlarge with 200gb SSD will run for ~$3 per month on a one year EC2 Instance
 
 ---
 
-#** Challenge 006**
+# **Challenge 006**
 
 ### 006 - **Ping the network**
 
