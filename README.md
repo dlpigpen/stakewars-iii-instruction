@@ -106,6 +106,12 @@ cd nearcore
 git fetch origin --tags
 git checkout 8448ad1ebf27731a43397686103aa5277e7f2fcf
 
+#Updated on July 22 new build:
+git fetch
+git checkout 0f81dca95a55f975b6e54fe6f311a71792e21698
+cargo build -p neard --release --features shardnet
+sudo systemctl restart neard 
+
 # Build the binary, this will take some time
 cargo build -p neard --release --features shardnet
 
