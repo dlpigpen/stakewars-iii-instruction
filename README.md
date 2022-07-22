@@ -555,6 +555,42 @@ crontab -e
 
 Check under `/home/<user_id>/logs/all.log` for ping history
 	
+## Docker
+Here is the the script for who wants to use Docker file:
+```
+FROM ubuntu:latest as build
+USER root
+ENV NEAR_ENV=shardnet
+ENV DEBIAN_FRONTEND noninteractive
+WORKDIR /tools/rust
+RUN apt update && apt dist-upgrade -y && apt install -y mc wget telnet git curl iotop atop vim && apt-get clean autoclean clang build-essential make libclang-dev && apt-get autoremove --yes && rm -rf /var/lib/{apt,dpkg,cache,log}/
+RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
+WORKDIR /tools
+RUN apt update && apt dist-upgrade -y && apt install -y build-essential libclang-dev && apt-get autoremove --yes && rm -rf /var/lib/{apt,dpkg,cache,log}/
+RUN echo 2
+RUN git clone https://github.com/near/nearcore /tools/nearcore
+WORKDIR /tools/nearcore
+#RUN git checkout 1.28.0
+RUN git checkout 0f81dca95a55f975b6e54fe6f311a71792e21698
+RUN ls /root/.cargo/bin
+ENV PATH="/root/.cargo/bin:$PATH" 
+RUN cargo build -p neard --release --features shardnet
+ENV PATH="/tools/nearcore/target/release:$PATH" 
+
+FROM ubuntu:latest
+USER root
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt update && apt dist-upgrade -y && apt install -y mc wget telnet git curl iotop atop vim jq && apt-get autoremove --yes && rm -rf /var/lib/{apt,dpkg,cache,log}/
+RUN useradd -d /app -ms /bin/bash app
+COPY start.sh /app/start.sh
+RUN chown app:app /app/start.sh && chmod 0700 /app/start.sh
+USER app
+WORKDIR /app
+COPY --from=build /tools/nearcore/target/release/neard /app/near/neard
+ENV PATH="/app/near:$PATH" 
+RUN echo 'export NEAR_ENV=shardnet' >> /app/.bashrc
+ENTRYPOINT [ "/app/start.sh" ]
+```
 	
 ## Mitsori Labs
 
