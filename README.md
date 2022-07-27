@@ -685,7 +685,7 @@ NEAR_ENV=shardnet near call $CONTRACT_ID withdraw '{}' --accountId $CONTRACT_ID 
 
 Link: https://explorer.shardnet.near.org/transactions/CMhsP2fegkYHtGwBuvhNACAJJyg9v4PKTuoWzKuQaLcD
 	
-![Screen Shot 2022-07-27 at 12.53.12 PM.png]([https://github.com/dlpigpen/stakewars-iii-instruction/blob/main/images/Screen%20Shot%202022-07-27%20at%2023.46.37.png?raw=true])
+![Screen Shot 2022-07-27 at 12.53.12 PM.png](https://github.com/dlpigpen/stakewars-iii-instruction/blob/main/images/Screen%20Shot%202022-07-27%20at%2023.46.37.png?raw=true)
 
 Note, this withdraw invocation not only withdraws the validator rewards, but also unstakes all self-delegations. The current unstaking period is 4-6 epochs, so you can either wait to unlock, or alternatively, you could just send some more balances to the owner account and stake again. Just make sure to stay above the seat price.
 
