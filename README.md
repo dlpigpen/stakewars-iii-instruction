@@ -639,9 +639,9 @@ Example
 NEAR_ENV=shardnet near deploy mdstaking.shardnet.near --wasmFile target/wasm32-unknown-unknown/release/contract.wasm
 ```
 
-Visit the explorer and make sure the contract is successfully deployed: https://explorer.shardnet.near.org/transactions/2iEpqzYAN76o6aBzmSGVVx4vykctB7YrYjsWy1Q6sbt
+Visit the explorer and make sure the contract is successfully deployed: [https://explorer.shardnet.near.org/transactions/2iEpqzYAN76o6aBzmSGVVx4vykctB7YrYjsWy1Q6sbt](https://explorer.shardnet.near.org/transactions/2iEpqzYAN76o6aBzmSGVVx4vykctB7YrYjsWy1Q6sbtY)
 
-![Screen Shot 2022-07-27 at 12.08.40 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a6b266bc-e72b-48c9-b619-3dad9135a45b/Screen_Shot_2022-07-27_at_12.08.40_PM.png)
+![Screen Shot 2022-07-27 at 12.08.40 PM.png](https://github.com/dlpigpen/stakewars-iii-instruction/blob/main/images/Screen%20Shot%202022-07-27%20at%2023.37.34.png?raw=true)
 
 **Split to two other accounts**
 
@@ -683,7 +683,9 @@ Example
 NEAR_ENV=shardnet near call $CONTRACT_ID withdraw '{}' --accountId $CONTRACT_ID --gas 200000000000000
 ```
 
-![Screen Shot 2022-07-27 at 12.53.12 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a8c834fc-cfb2-445e-a635-a2c02e7eca1d/Screen_Shot_2022-07-27_at_12.53.12_PM.png)
+Link: https://explorer.shardnet.near.org/transactions/CMhsP2fegkYHtGwBuvhNACAJJyg9v4PKTuoWzKuQaLcD
+	
+![Screen Shot 2022-07-27 at 12.53.12 PM.png]([https://github.com/dlpigpen/stakewars-iii-instruction/blob/main/images/Screen%20Shot%202022-07-27%20at%2023.46.37.png?raw=true])
 
 Note, this withdraw invocation not only withdraws the validator rewards, but also unstakes all self-delegations. The current unstaking period is 4-6 epochs, so you can either wait to unlock, or alternatively, you could just send some more balances to the owner account and stake again. Just make sure to stay above the seat price.
 
