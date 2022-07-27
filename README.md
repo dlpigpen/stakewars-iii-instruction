@@ -591,6 +591,107 @@ ENV PATH="/app/near:$PATH"
 RUN echo 'export NEAR_ENV=shardnet' >> /app/.bashrc
 ENTRYPOINT [ "/app/start.sh" ]
 ```
+
+# **Challenge 008**
+
+| Task | Notes |
+| --- | --- |
+| 008 - Deploy a reward split contract |  |
+
+### 008 - Deploy a reward split contract
+
+The idea of this smart contract is to deploy to an account that owns a staking pool. With the smart contract deployed, the owner of the staking pool will be able redistribute validator rewards to other accounts.
+
+**Dependencies**
+
+```bash
+# Install rust
+curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+source $HOME/.cargo/env
+
+# Add wasm toolchain
+rustup target add wasm32-unknown-unknown
+```
+
+**Clone project repo**
+
+```bash
+git clone https://github.com/zavodil/near-staking-pool-owner
+```
+
+**Compile the smart contract**
+
+```bash
+cd near-staking-pool-owner/contract
+cargo build --target wasm32-unknown-unknown --release or
+sh build.sh
+```
+
+**Deploy the contract**
+
+```bash
+NEAR_ENV=shardnet near deploy <OWNER_ID>.shardnet.near --wasmFile target/wasm32-unknown-unknown/release/contract.wasm
+```
+
+Example
+
+```bash
+NEAR_ENV=shardnet near deploy mdstaking.shardnet.near --wasmFile target/wasm32-unknown-unknown/release/contract.wasm
+```
+
+Visit the explorer and make sure the contract is successfully deployed: https://explorer.shardnet.near.org/transactions/2iEpqzYAN76o6aBzmSGVVx4vykctB7YrYjsWy1Q6sbt
+
+![Screen Shot 2022-07-27 at 12.08.40 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a6b266bc-e72b-48c9-b619-3dad9135a45b/Screen_Shot_2022-07-27_at_12.08.40_PM.png)
+
+**Split to two other accounts**
+
+First create two more wallets on [https://wallet.shardnet.near.org/](https://wallet.shardnet.near.org/)
+
+In our case, our two wallets are `mdstakingu1.shardnet.near` and `mdstakingu2.shardnet.near`
+
+Env variable
+
+```bash
+export CONTRACT_ID=mdstaking.shardnet.near
+```
+
+Initialize the smart contract with these accounts
+
+```bash
+near call $CONTRACT_ID new '{"staking_pool_account_id": "<STAKINGPOOL_ID>.factory.shardnet.near", "owner_id":"<OWNER_ID>.shardnet.near", "reward_receivers": [["<SPLITED_ACCOUNT_ID_1>.shardnet.near", {"numerator": 3, "denominator":10}], ["<SPLITED_ACCOUNT_ID_2>.shardnet.near", {"numerator": 70, "denominator":100}]]}' --accountId $CONTRACT_ID
+```
+
+Example
+
+```bash
+# This will send 30% of pool rewards to ll1 and 70% to ll2
+
+near call $CONTRACT_ID new '{"staking_pool_account_id": "mitsorilab2.factory.shardnet.near", "owner_id":"mitsorilab.shardnet.near", "reward_receivers": [["mdstakingu1.shardnet.near", {"numerator": 3, "denominator":10}], ["mdstakingu2.shardnet.near", {"numerator": 70, "denominator":100}]]}' --accountId $CONTRACT_ID
+```
+
+**Withdraw rewards**
+
+```bash
+# Call the withdraw method on the owner account, this action will unstake & withdraw service fee received by pool and distribute it among the reward receivers.
+
+NEAR_ENV=shardnet near call $CONTRACT_ID withdraw '{}' --accountId $CONTRACT_ID --gas 200000000000000
+```
+
+Example
+
+```bash
+NEAR_ENV=shardnet near call $CONTRACT_ID withdraw '{}' --accountId $CONTRACT_ID --gas 200000000000000
+```
+
+![Screen Shot 2022-07-27 at 12.53.12 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a8c834fc-cfb2-445e-a635-a2c02e7eca1d/Screen_Shot_2022-07-27_at_12.53.12_PM.png)
+
+Note, this withdraw invocation not only withdraws the validator rewards, but also unstakes all self-delegations. The current unstaking period is 4-6 epochs, so you can either wait to unlock, or alternatively, you could just send some more balances to the owner account and stake again. Just make sure to stay above the seat price.
+
+Example
+
+```bash
+near call mitsorilab2.factory.shardnet.near deposit_and_stake --amount 450 --accountId mitsorilab.shardnet.near --gas=300000000000000
+```
 	
 ## Mitsori Labs
 
