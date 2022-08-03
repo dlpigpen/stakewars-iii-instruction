@@ -111,6 +111,7 @@ git fetch
 git checkout 0f81dca95a55f975b6e54fe6f311a71792e21698
 cargo build -p neard --release --features shardnet
 sudo systemctl restart neard 
+sudo systemctl start neard
 
 # Build the binary, this will take some time
 cargo build -p neard --release --features shardnet
