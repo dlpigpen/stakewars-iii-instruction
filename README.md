@@ -327,12 +327,21 @@ near call <pool_id> pause_staking '{}' --accountId <account_id>
 
 # Resume Staking
 near call <pool_id> resume_staking '{}' --accountId <account_id>
-```
 
 # Check chunk processed
-```
 curl -s -d '{"jsonrpc": "2.0", "method": "validators", "id": "dontcare", "params": [null]}' -H 'Content-Type: application/json' http://localhost:3030/ | jq -c '.result.current_validators[] | select(.account_id | contains ("mitsorilab2.factory.shardnet.near"))'
+
+# get staking key
+near view mitsorilab2.factory.shardnet.near get_staking_key '{}'
+
+# updating staking key
+near call factory.shardnet.near update_staking_pool '{"staking_pool_id": "mitsorilab2", "owner_id": "mitsorilab.shardnet.near", "stake_public_key": "ed25519:JDWP98FnhBVDEzQuEQXywjNoPyLNPuRmCRtFcXGMCtj4**", "reward_fee_fraction": {"numerator": 5, "denominator": 100}, "code_hash":"DD428g9eqLL8fWUxv8QSpVFzyHi1Qd16P8ephYCTmMSZ**"}' --accountId="mitsorilab.shardnet.near" --amount=30 --gas=300000000000000
+
+# Update reward
+near call mitsorilab2.factory.shardnet.near update_reward_fee_fraction '{"reward_fee_fraction": {"numerator": 1, "denominator": 100}}' --accountId "mitsorilab.shardnet.near" --gas=300000000000000
+
 ```
+
 
 **Submit the proposal**
 
