@@ -104,7 +104,7 @@ source $HOME/.cargo/env
 git clone https://github.com/near/nearcore
 cd nearcore
 git fetch origin --tags
-git checkout 0d7f272afabc00f4a076b1c89a70ffc62466efe9
+git checkout 68bfa84ed1455f891032434d37ccad696e91e4f5
 
 #Updated on July 22 new build:
 git fetch
