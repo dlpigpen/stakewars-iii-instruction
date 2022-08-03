@@ -329,6 +329,11 @@ near call <pool_id> pause_staking '{}' --accountId <account_id>
 near call <pool_id> resume_staking '{}' --accountId <account_id>
 ```
 
+# Check chunk processed
+```
+curl -s -d '{"jsonrpc": "2.0", "method": "validators", "id": "dontcare", "params": [null]}' -H 'Content-Type: application/json' http://localhost:3030/ | jq -c '.result.current_validators[] | select(.account_id | contains ("mitsorilab2.factory.shardnet.near"))'
+```
+
 **Submit the proposal**
 
 In order to have a validator seat, you must submit a proposal with a ping. A ping issues a new proposal and updates the staking balances for your delegators. A ping should be issued each epoch to keep reported rewards current.
