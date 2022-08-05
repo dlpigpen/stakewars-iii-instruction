@@ -452,7 +452,9 @@ crontab -e
 ```
 Put command as a cron job for every minute. Replace UserDirectory with path to user directory.
 ```
-* * * * * /<UserDirectory>/near-protocol-node-telegram-notifications/report_node_status.sh &> /dev/null
+crontab -e
+Paste:
+* * * * * cd /path/to/script && ./report_node_status.sh &> /dev/null
 ```
 
 Crontab job to check node status using script
