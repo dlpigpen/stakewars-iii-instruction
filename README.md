@@ -767,7 +767,7 @@ The result should be:
 }
 ```
 
-
+You can check your score validator node by visitting this link: https://openshards.io/shardnet-uptime-scoreboard/
 	
 ## Mitsori Labs
 
