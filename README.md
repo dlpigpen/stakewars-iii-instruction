@@ -712,6 +712,452 @@ Example
 near call mitsorilab2.factory.shardnet.near deposit_and_stake --amount 450 --accountId mitsorilab.shardnet.near --gas=300000000000000
 ```
 	
+# **Challenge 009**
+There are a number of ways to enable ports, since this guide is mostly based on AWS configurations, we’ll enable it directly on AWS. First visit your AWS EC2 console, select your node, under
+
+```
+Security tab → Click the security group used → Edit inbound rules → Add Custom TCP 3030 for all IP’s.
+```
+
+Verify the port is open with this RPC call
+
+`http://<your node ip>:3030/status` 
+
+The result should be:
+```
+{
+"version": {
+"version": "trunk",
+"build": "1.1.0-2565-g68bfa84ed",
+"rustc_version": "1.62.1"
+},
+"chain_id": "shardnet",
+"protocol_version": 100,
+"latest_protocol_version": 100,
+"rpc_addr": "0.0.0.0:3030",
+"validators": [
+{
+"account_id": "mitsorilab2.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "boot1.near",
+"is_slashed": false
+},
+{
+"account_id": "boot2.near",
+"is_slashed": false
+},
+{
+"account_id": "boot3.near",
+"is_slashed": false
+},
+{
+"account_id": "boot4.near",
+"is_slashed": false
+},
+{
+"account_id": "stakewars-fi-2.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "the-auction.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "dokebi.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "beobeo.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "bongloz.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "dkrasovskyi.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "magicpowered.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "toxa01.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "idea404.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "hj-pos.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "romanv1812.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "kiln.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "pool2-lovali.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "scholtz.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "klesh.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "vnstakewar.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "vixello.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "ait-belhaj.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "malghz.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "ihor.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "dwrx.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "spin.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "pool4u.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "ttimmatti_pool.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "n.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "xpool.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "evstigneeff2.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "verse2.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "domanodes.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "duonghb.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "stakewars-de-2.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "j.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "ir.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "nikitinslava.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "dimasik1.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "cryptosynk01.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "imiroslav.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "fairylovehn127.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "apple14.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "wackazong.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "ftx.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "teoviteovi.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "baf.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "bloclick.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "alexey.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "near01b.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "azetsi.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "mogajp.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "shardlabs.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "jindoge.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "alexcryptopool.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "wolkow.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "staking4all01.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "yanz.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "spectrum.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "node1-hapi.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "zentria0.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "bodya_emperor.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "bwarelabs.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "dimaneug.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "zilinear2.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "vnear.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "eximus.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "diamondhands.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "nodeuncle.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "dw.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "marketmaker01.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "soteria_trust.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "nachalstvo.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "bitszn.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "wweekend.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "add.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "vitalpointai.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "blntbytk.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "meduza.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "trrum.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "idtcn1.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "idtcn2.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "pinrock.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "eav1962.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "crack.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "phuonguyen.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "polkachu.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "luminaryvision.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "darkjoehank.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "dklabco.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "leex.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "michaeld.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "web34ever.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "kennode.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "markelov.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "duytang.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "ou812.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "max.factory.shardnet.near",
+"is_slashed": false
+},
+{
+"account_id": "redhair.factory.shardnet.near",
+"is_slashed": false
+}
+],
+"sync_info": {
+"latest_block_hash": "AYN4WFCCLaNsj4kizRFrBTwrNXQoM4AkYLaWPHYFGKZ6",
+"latest_block_height": 1802544,
+"latest_state_root": "C3gdA22yQ5xXDiVb9vuApG3aSy2sMxXdmgKsXsN2dgwi",
+"latest_block_time": "2022-08-06T16:13:25.257398360Z",
+"syncing": false,
+"earliest_block_hash": "GLd33SUSTQzqVAaGL2Bwuzq1547zdXYaQxxhbjoWackZ",
+"earliest_block_height": 1758872,
+"earliest_block_time": "2022-08-04T20:22:36.562241596Z",
+"epoch_id": "8TJSdFQBEVBykiLJwmMgUtkpKA2wzcvwHHxaFwQKb7ea",
+"epoch_start_height": 1798882
+},
+"validator_account_id": "mitsorilab2.factory.shardnet.near",
+"node_key": "ed25519:HqomNzjXgwi4YuKnxy7beR8cAFJT3ebRcxkPGY8eiERk",
+"uptime_sec": 126385
+}
+```
+
+
+
+	
 ## Mitsori Labs
 
 Website: [https://hamado-ltd.com/](https://hamado-ltd.com)
