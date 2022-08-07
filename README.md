@@ -496,6 +496,8 @@ Save and navigate to Near Node dashboard.
 
 Now you have super detailed information about what happening in Near node and will get alerts to telegram if any of these parameters are out of range.
 
+- Node replacement: https://github.com/ruziev-dev/near-node-tg-bot
+
 # **Challenge 005**
 
 ### 005 - Mount a node validator on AWS
