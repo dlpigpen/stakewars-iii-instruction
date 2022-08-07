@@ -726,44 +726,44 @@ Verify the port is open with this RPC call
 The result should be:
 ```
 {
-"version": {
-"version": "trunk",
-"build": "1.1.0-2565-g68bfa84ed",
-"rustc_version": "1.62.1"
-},
-"chain_id": "shardnet",
-"protocol_version": 100,
-"latest_protocol_version": 100,
-"rpc_addr": "0.0.0.0:3030",
-"validators": [
-{
-"account_id": "mitsorilab2.factory.shardnet.near",
-"is_slashed": false
-},
-{
-"account_id": "eximus.factory.shardnet.near",
-"is_slashed": false
-}
-{
-"account_id": "redhair.factory.shardnet.near",
-"is_slashed": false
-}
-],
-"sync_info": {
-"latest_block_hash": "AYN4WFCCLaNsj4kizRFrBTwrNXQoM4AkYLaWPHYFGKZ6",
-"latest_block_height": 1802544,
-"latest_state_root": "C3gdA22yQ5xXDiVb9vuApG3aSy2sMxXdmgKsXsN2dgwi",
-"latest_block_time": "2022-08-06T16:13:25.257398360Z",
-"syncing": false,
-"earliest_block_hash": "GLd33SUSTQzqVAaGL2Bwuzq1547zdXYaQxxhbjoWackZ",
-"earliest_block_height": 1758872,
-"earliest_block_time": "2022-08-04T20:22:36.562241596Z",
-"epoch_id": "8TJSdFQBEVBykiLJwmMgUtkpKA2wzcvwHHxaFwQKb7ea",
-"epoch_start_height": 1798882
-},
-"validator_account_id": "mitsorilab2.factory.shardnet.near",
-"node_key": "ed25519:HqomNzjXgwi4YuKnxy7beR8cAFJT3ebRcxkPGY8eiERk",
-"uptime_sec": 126385
+  "version": {
+    "version": "trunk",
+    "build": "1.1.0-2565-g68bfa84ed",
+    "rustc_version": "1.62.1"
+  },
+  "chain_id": "shardnet",
+  "protocol_version": 100,
+  "latest_protocol_version": 100,
+  "rpc_addr": "0.0.0.0:3030",
+  "validators": [
+    {
+      "account_id": "mitsorilab2.factory.shardnet.near",
+      "is_slashed": false
+    },
+    {
+      "account_id": "eximus.factory.shardnet.near",
+      "is_slashed": false
+    },
+    {
+      "account_id": "redhair.factory.shardnet.near",
+      "is_slashed": false
+    }
+  ],
+  "sync_info": {
+    "latest_block_hash": "AYN4WFCCLaNsj4kizRFrBTwrNXQoM4AkYLaWPHYFGKZ6",
+    "latest_block_height": 1802544,
+    "latest_state_root": "C3gdA22yQ5xXDiVb9vuApG3aSy2sMxXdmgKsXsN2dgwi",
+    "latest_block_time": "2022-08-06T16:13:25.257398360Z",
+    "syncing": false,
+    "earliest_block_hash": "GLd33SUSTQzqVAaGL2Bwuzq1547zdXYaQxxhbjoWackZ",
+    "earliest_block_height": 1758872,
+    "earliest_block_time": "2022-08-04T20:22:36.562241596Z",
+    "epoch_id": "8TJSdFQBEVBykiLJwmMgUtkpKA2wzcvwHHxaFwQKb7ea",
+    "epoch_start_height": 1798882
+  },
+  "validator_account_id": "mitsorilab2.factory.shardnet.near",
+  "node_key": "ed25519:HqomNzjXgwi4YuKnxy7beR8cAFJT3ebRcxkPGY8eiERk",
+  "uptime_sec": 126385
 }
 ```
 
