@@ -119,6 +119,13 @@ cargo build -p neard --release --features shardnet
 # Check version
 ./target/release/neard -V
 neard (release 1.28.0-rc.2) (build crates-0.14.0-145-g86b95c353-modified) (rustc 1.61.0) (protocol 100) (db 31)
+
+# watch logs
+sudo systemctl stop neard
+sudo systemctl start neard
+sudo systemctl restart neard
+journalctl -fu neard | ccze -A
+
 ```
 
 **Initialize data directories**
